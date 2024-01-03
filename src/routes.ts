@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { PlayableBuild } from './types';
+import { sha256Hash } from './helpers';
+
 const routes = Router();
 
 routes.get('/', (req, res) => {
@@ -21,7 +23,7 @@ routes.get('/available-builds', async (req, res) => {
         folders.map((i) => {
             return {
                 name: i.name,
-                id: i.id,
+                id: sha256Hash(i.CID),
             };
         }),
     );
