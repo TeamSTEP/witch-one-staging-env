@@ -15,6 +15,10 @@ class ServerApp {
         console.log('Starting the server');
         this.server = express();
 
+        if (!process.env.API_KEY || !process.env.API_SECRET || !process.env.BUCKET_UUID) {
+            throw new Error('API_KEY, API_SECRET, or BUCKET_UUID is not set.');
+        }
+
         this._apiInst = new ApillonApi(process.env.API_KEY, process.env.API_SECRET);
 
         this.middlewares();
